@@ -1,4 +1,4 @@
-function transform(data: number[]): number[] {
+function transformData(data: number[]): number[] {
   console.log("Transforming data...");
 
   for (let i = 1; i < data.length; i++) {
@@ -16,4 +16,4 @@ function transform(data: number[]): number[] {
   return data;
 }
 
-export default transform;
+export default transformData;

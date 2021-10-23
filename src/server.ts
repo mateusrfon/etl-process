@@ -1,12 +1,8 @@
-import app from "./app";
-import extract from "./extract";
-import transform from "./transform";
-//extract -> transform -> load(api)
-const port = 4000;
+import startServer from "./load";
+import extractData from "./extractData";
+import transformData from "./transformData";
 
-extract().then((extraction) => {
-  const data = transform(extraction); //passar data para o load
-  app.listen(port, () => {
-    console.log(`Server is listening on port ${port}.`);
-  });
+extractData().then((extraction) => {
+  const loadData = transformData(extraction);
+  startServer(loadData);
 });
