@@ -5,12 +5,13 @@ interface ChallengeData {
 }
 
 async function extract(): Promise<number[]> {
+  console.log("Extracting data...");
+
   let data = true;
   let i = 1;
   let extraction: number[] = [];
 
   while (data) {
-    console.log(i);
     let error = false;
     await axios
       .get<ChallengeData>(

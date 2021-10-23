@@ -6,6 +6,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//app.get("/categories", categoriesController.get);
+app.get("/load", (req, res) => {
+  //res.send(data);
+});
 
 export default app;
