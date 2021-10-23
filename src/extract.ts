@@ -5,30 +5,34 @@ interface ChallengeData {
 }
 
 async function extract(): Promise<number[]> {
-  try {
-    let data = true;
-    let i = 1;
-    let extraction: number[] = [];
+  let data = true;
+  let i = 1;
+  let extraction: number[] = [];
 
-    while (data) {
-      console.log(i);
-      const request = await axios.get(
+  while (data) {
+    console.log(i);
+    let error = false;
+    await axios
+      .get<ChallengeData>(
         `http://challenge.dienekes.com.br/api/numbers?page=${i}`
-      );
-      const { numbers } = request.data as ChallengeData;
-      if (numbers === [] || numbers === null) {
-        console.log(numbers);
-        data = false;
-      } else {
-        numbers.forEach((number) => extraction.push(number));
-      }
-      i++;
-    }
-    console.log(extraction.length);
-    return extraction;
-  } catch (err) {
-    console.error(err.response.data.error);
+      )
+      .then((res) => {
+        const { numbers } = res.data;
+        if (numbers.length === 0) {
+          data = false;
+        } else {
+          numbers.forEach((number) => extraction.push(number));
+        }
+      })
+      .catch((err) => {
+        console.error(err.response.data.error);
+        error = true;
+      });
+    if (error) continue;
+    i++;
   }
+
+  return extraction;
 }
 
 export default extract;
