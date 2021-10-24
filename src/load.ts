@@ -1,9 +1,7 @@
 import express from "express";
 import cors from "cors";
 
-const port = 4000;
-
-function startServer(data: number[]) {
+function load(data: number[]) {
   const app = express();
   app.use(cors());
   app.use(express.json());
@@ -16,9 +14,7 @@ function startServer(data: number[]) {
     }
   });
 
-  app.listen(port, () => {
-    console.log(`Server is listening on port ${port}.`);
-  });
+  return app;
 }
 
-export default startServer;
+export default load;
