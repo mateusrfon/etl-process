@@ -28,6 +28,8 @@ $ npm run build
 $ npm run start
 ```
 
+## Other commands
+
 ### Developer start
 
 ```bash
